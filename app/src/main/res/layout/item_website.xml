@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:id="@+id/websiteCardContainer"
+    android:layout_width="match_parent"
+    android:layout_height="170dp"
+    android:layout_margin="7dp">
+
+
+    <!-- ========================================================= -->
+    <!-- WEBSITE CARD                                               -->
+    <!-- ========================================================= -->
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/websiteCard"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="2dp"
+
+        app:strokeColor="#E8ECF2"
+        app:strokeWidth="1dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:gravity="center"
+            android:orientation="vertical"
+
+            android:padding="14dp">
+
+
+            <!-- ================================================= -->
+            <!-- ICON CONTAINER                                     -->
+            <!-- ================================================= -->
+
+            <FrameLayout
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+
+                android:background="@drawable/site_icon_background"
+                android:padding="12dp">
+
+
+                <ImageView
+                    android:id="@+id/siteIcon"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:contentDescription="@null"
+
+                    android:scaleType="fitCenter" />
+
+            </FrameLayout>
+
+
+            <!-- ================================================= -->
+            <!-- WEBSITE NAME                                       -->
+            <!-- ================================================= -->
+
+            <TextView
+                android:id="@+id/siteName"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="11dp"
+
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+
+                android:text="Amazon"
+
+                android:textColor="#172033"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <!-- ========================================================= -->
+    <!-- DELETE BUTTON                                             -->
+    <!-- ========================================================= -->
+
+    <ImageButton
+        android:id="@+id/deleteButton"
+
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+
+        android:layout_gravity="top|end"
+
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+
+        android:background="@drawable/delete_button_background"
+
+        android:clickable="true"
+        android:focusable="true"
+
+        android:contentDescription="Delete website"
+
+        android:elevation="8dp"
+
+        android:padding="9dp"
+
+        android:src="@drawable/ic_delete"
+
+        android:visibility="gone"
+
+        app:tint="@android:color/white" />
+
+</FrameLayout>
