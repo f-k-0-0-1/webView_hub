@@ -9,15 +9,19 @@ Instead of opening multiple websites separately, users can create website shortc
 - Add custom website shortcuts using a URL
 - Automatically generate website names from URLs
 - Automatically load website favicons
-- Open websites directly inside the app
+- Open websites directly inside the app using Android WebView
 - Built-in shortcuts for popular websites
-- Delete shortcuts with a long press
-- Delete button automatically disappears after 3 seconds
-- Custom shortcuts are saved locally on the device
-- Deleted shortcuts remain deleted after restarting the app
-- Clean and responsive grid-based UI
+- Long-press website cards to access deletion controls
+- Temporary delete button with automatic 3-second timeout
+- Persistent local storage for custom website shortcuts
+- Deleted shortcuts remain deleted after app restarts
+- Website Locker for managing saved shortcuts
+- Clean and responsive grid-based interface
 - Light-themed WebView experience
-- No account or server required for shortcut management
+- Centralized theme management
+- Customized Android status-bar and navigation-bar appearance
+- Fully local shortcut management with no account or server required
+- Modular architecture for storage, theme, website, and system UI management
 
 ## Built-in Websites
 
