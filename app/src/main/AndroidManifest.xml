@@ -34,6 +34,13 @@
             android:name=".WebViewActivity"
             android:exported="false" />
 
+        <!-- ===================================================== -->
+        <!-- LOCKER ACTIVITY                                      -->
+        <!-- ===================================================== -->
+
+        <activity
+            android:name=".LockerActivity"
+            android:exported="false" />
 
         <!-- ===================================================== -->
         <!-- MAIN ACTIVITY                                         -->

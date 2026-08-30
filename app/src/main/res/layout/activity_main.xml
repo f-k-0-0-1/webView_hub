@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
 
             android:layout_marginStart="24dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="38dp"
 
             android:text="WebView Hub"
 
@@ -42,6 +42,36 @@
 
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+
+        <!-- ===================================================== -->
+        <!-- LOCKER BUTTON                                           -->
+        <!-- ===================================================== -->
+
+        <ImageButton
+            android:id="@+id/lockerButton"
+
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+
+            android:layout_marginTop="38dp"
+            android:layout_marginEnd="20dp"
+
+            android:background="@android:color/transparent"
+
+            android:clickable="true"
+            android:focusable="true"
+
+            android:contentDescription="Open locker"
+
+            android:padding="9dp"
+
+            android:src="@drawable/ic_lock"
+
+            app:tint="#2878E8"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
 
         <!-- ===================================================== -->
@@ -125,5 +155,22 @@
         app:maxImageSize="24dp"
 
         app:tint="@android:color/white" />
+
+
+    <!-- ========================================================= -->
+    <!-- DARK STATUS BAR OVERLAY                                    -->
+    <!-- ========================================================= -->
+
+    <View
+        android:id="@+id/statusBarOverlay"
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        android:layout_gravity="top"
+
+        android:background="#99000000"
+
+        android:elevation="20dp" />
 
 </FrameLayout>

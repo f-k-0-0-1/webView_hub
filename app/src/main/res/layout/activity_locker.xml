@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:id="@+id/lockerRoot"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="#F8F9FC">
+
+
+    <!-- ========================================================= -->
+    <!-- HEADER                                                    -->
+    <!-- ========================================================= -->
+
+    <LinearLayout
+        android:id="@+id/lockerHeader"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+
+        android:paddingStart="20dp"
+        android:paddingTop="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="12dp">
+
+
+        <!-- ===================================================== -->
+        <!-- BACK BUTTON                                            -->
+        <!-- ===================================================== -->
+
+        <ImageButton
+            android:id="@+id/backButton"
+
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="20dp"
+
+            android:background="@android:color/transparent"
+
+            android:contentDescription="Back"
+
+            android:padding="10dp"
+
+            android:src="@drawable/ic_arrow_back"
+
+            app:tint="#172033" />
+
+
+        <!-- ===================================================== -->
+        <!-- LOCK ICON                                              -->
+        <!-- ===================================================== -->
+
+        <ImageView
+            android:id="@+id/lockerIcon"
+
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="20dp"
+
+            android:layout_marginStart="8dp"
+
+            android:contentDescription="@null"
+
+            android:src="@drawable/ic_lock"
+
+            app:tint="#2878E8" />
+
+
+        <!-- ===================================================== -->
+        <!-- TITLE                                                   -->
+        <!-- ===================================================== -->
+
+        <TextView
+            android:id="@+id/lockerTitle"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="8dp"
+
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="20dp"
+
+            android:text="Locker"
+
+            android:textColor="#172033"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+    <!-- ========================================================= -->
+    <!-- WEBSITE GRID                                              -->
+    <!-- ========================================================= -->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lockerRecyclerView"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:layout_marginTop="96dp"
+
+        android:clipToPadding="false"
+
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="110dp" />
+
+
+    <!-- ========================================================= -->
+    <!-- ADD WEBSITE BUTTON                                        -->
+    <!-- ========================================================= -->
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/lockerAddButton"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="bottom|end"
+
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="24dp"
+
+        android:contentDescription="Add website"
+
+        android:src="@drawable/ic_add"
+
+        app:backgroundTint="#2878E8"
+        app:borderWidth="0dp"
+        app:elevation="8dp"
+        app:maxImageSize="24dp"
+        app:tint="@android:color/white" />
+
+
+    <!-- ========================================================= -->
+    <!-- DARK STATUS BAR OVERLAY                                    -->
+    <!-- ========================================================= -->
+
+    <View
+        android:id="@+id/statusBarOverlay"
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        android:layout_gravity="top"
+
+        android:background="#99000000"
+
+        android:elevation="20dp" />
+
+</FrameLayout>

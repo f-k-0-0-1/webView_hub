@@ -1,18 +1,16 @@
 package com.fk.allinone
 
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.text.InputType
 import android.util.Patterns
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,17 +27,17 @@ class MainActivity : AppCompatActivity() {
     // ================================================================
 
     private lateinit var websiteRecyclerView: RecyclerView
+
     private lateinit var addWebsiteButton: FloatingActionButton
+
+    private lateinit var lockerButton: ImageButton
 
 
     // ================================================================
     // ADAPTER
     // ================================================================
 
-    private lateinit var websiteAdapter
-
-
-            : WebsiteAdapter
+    private lateinit var websiteAdapter: WebsiteAdapter
 
 
     // ================================================================
@@ -75,13 +73,29 @@ class MainActivity : AppCompatActivity() {
         )
 
 
-        setupSystemBars()
+        // ------------------------------------------------------------
+        // SYSTEM BARS
+        // ------------------------------------------------------------
+
+        SystemBarUtils.setup(
+            window,
+            findViewById(
+                R.id.rootLayout
+            )
+        )
+
+
+        // ------------------------------------------------------------
+        // INITIALIZE
+        // ------------------------------------------------------------
 
         initializeViews()
 
         setupWebsiteGrid()
 
         setupAddButton()
+
+        setupLockerButton()
 
 
         // ------------------------------------------------------------
@@ -103,44 +117,6 @@ class MainActivity : AppCompatActivity() {
 
 
     // ================================================================
-    // SYSTEM BARS
-    // ================================================================
-
-    private fun setupSystemBars() {
-
-        WindowCompat.setDecorFitsSystemWindows(
-            window,
-            true
-        )
-
-
-        @Suppress("DEPRECATION")
-        window.statusBarColor =
-            Color.WHITE
-
-
-        @Suppress("DEPRECATION")
-        window.navigationBarColor =
-            Color.WHITE
-
-
-        val controller =
-            WindowInsetsControllerCompat(
-                window,
-                window.decorView
-            )
-
-
-        controller.isAppearanceLightStatusBars =
-            true
-
-
-        controller.isAppearanceLightNavigationBars =
-            true
-    }
-
-
-    // ================================================================
     // INITIALIZE VIEWS
     // ================================================================
 
@@ -155,6 +131,12 @@ class MainActivity : AppCompatActivity() {
         addWebsiteButton =
             findViewById(
                 R.id.addWebsiteButton
+            )
+
+
+        lockerButton =
+            findViewById(
+                R.id.lockerButton
             )
     }
 
@@ -178,7 +160,6 @@ class MainActivity : AppCompatActivity() {
                 websites =
                     websites,
 
-
                 // ----------------------------------------------------
                 // CARD CLICK
                 // ----------------------------------------------------
@@ -189,7 +170,6 @@ class MainActivity : AppCompatActivity() {
                         website
                     )
                 },
-
 
                 // ----------------------------------------------------
                 // CARD DELETE
@@ -269,57 +249,24 @@ class MainActivity : AppCompatActivity() {
             websites.clear()
 
 
-            // --------------------------------------------------------
-            // FIRST LAUNCH
-            // --------------------------------------------------------
-
             if (
                 savedWebsites.isEmpty()
             ) {
-
-                /*
-                 * Nothing has been saved yet.
-                 *
-                 * This means this is the first launch.
-                 *
-                 * Create the four default cards.
-                 */
 
                 websites.addAll(
                     getDefaultWebsites()
                 )
 
 
-                /*
-                 * IMPORTANT:
-                 *
-                 * Save the defaults immediately.
-                 *
-                 * From this point onward, the defaults
-                 * behave exactly like user-created cards.
-                 */
-
                 saveWebsites()
 
             } else {
-
-                /*
-                 * Data already exists.
-                 *
-                 * Load EXACTLY what was saved.
-                 *
-                 * Do NOT recreate deleted cards.
-                 */
 
                 websites.addAll(
                     savedWebsites
                 )
             }
 
-
-            // --------------------------------------------------------
-            // REFRESH UI
-            // --------------------------------------------------------
 
             websiteAdapter.notifyDataSetChanged()
         }
@@ -335,6 +282,28 @@ class MainActivity : AppCompatActivity() {
         addWebsiteButton.setOnClickListener {
 
             showAddWebsiteDialog()
+        }
+    }
+
+
+    // ================================================================
+    // LOCKER BUTTON
+    // ================================================================
+
+    private fun setupLockerButton() {
+
+        lockerButton.setOnClickListener {
+
+            val intent =
+                Intent(
+                    this,
+                    LockerActivity::class.java
+                )
+
+
+            startActivity(
+                intent
+            )
         }
     }
 
@@ -363,10 +332,6 @@ class MainActivity : AppCompatActivity() {
                     InputType.TYPE_TEXT_VARIATION_URI
 
 
-        // ------------------------------------------------------------
-        // INPUT SPACING
-        // ------------------------------------------------------------
-
         input.setPadding(
             32,
             12,
@@ -378,10 +343,6 @@ class MainActivity : AppCompatActivity() {
         input.minHeight =
             56
 
-
-        // ------------------------------------------------------------
-        // DIALOG
-        // ------------------------------------------------------------
 
         val dialog =
             AlertDialog.Builder(this)
@@ -410,10 +371,6 @@ class MainActivity : AppCompatActivity() {
 
                 .create()
 
-
-        // ------------------------------------------------------------
-        // ADD BUTTON
-        // ------------------------------------------------------------
 
         dialog.setOnShowListener {
 
@@ -448,10 +405,6 @@ class MainActivity : AppCompatActivity() {
         dialog: AlertDialog
     ) {
 
-        // ------------------------------------------------------------
-        // EMPTY URL
-        // ------------------------------------------------------------
-
         if (
             enteredUrl.isBlank()
         ) {
@@ -467,10 +420,6 @@ class MainActivity : AppCompatActivity() {
         var url =
             enteredUrl
 
-
-        // ------------------------------------------------------------
-        // ADD HTTPS
-        // ------------------------------------------------------------
 
         if (
             !url.startsWith(
@@ -488,10 +437,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        // ------------------------------------------------------------
-        // VALIDATE URL
-        // ------------------------------------------------------------
-
         if (
             !Patterns.WEB_URL
                 .matcher(url)
@@ -505,10 +450,6 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-
-        // ------------------------------------------------------------
-        // PARSE URL
-        // ------------------------------------------------------------
 
         val uri =
             Uri.parse(
@@ -532,27 +473,15 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        // ------------------------------------------------------------
-        // WEBSITE NAME
-        // ------------------------------------------------------------
-
         val websiteName =
             createWebsiteName(
                 host
             )
 
 
-        // ------------------------------------------------------------
-        // FAVICON URL
-        // ------------------------------------------------------------
-
         val iconUrl =
             "${uri.scheme}://${uri.host}/favicon.ico"
 
-
-        // ------------------------------------------------------------
-        // CREATE WEBSITE
-        // ------------------------------------------------------------
 
         val website =
             Website(
@@ -572,37 +501,21 @@ class MainActivity : AppCompatActivity() {
             )
 
 
-        // ------------------------------------------------------------
-        // ADD TO LIST
-        // ------------------------------------------------------------
-
         websites.add(
             website
         )
 
-
-        // ------------------------------------------------------------
-        // UPDATE UI
-        // ------------------------------------------------------------
 
         websiteAdapter.notifyItemInserted(
             websites.lastIndex
         )
 
 
-        // ------------------------------------------------------------
-        // SAVE EVERYTHING
-        // ------------------------------------------------------------
-
         lifecycleScope.launch {
 
             saveWebsites()
         }
 
-
-        // ------------------------------------------------------------
-        // CLOSE DIALOG
-        // ------------------------------------------------------------
 
         dialog.dismiss()
 
@@ -614,26 +527,10 @@ class MainActivity : AppCompatActivity() {
 
 
     // ================================================================
-    // SAVE ALL WEBSITES
+    // SAVE WEBSITES
     // ================================================================
 
     private suspend fun saveWebsites() {
-
-        /*
-         * IMPORTANT:
-         *
-         * We now save ALL websites.
-         *
-         * This includes:
-         *
-         * - Amazon
-         * - Facebook
-         * - Instagram
-         * - Reddit
-         * - User-created websites
-         *
-         * Therefore deleting ANY card is persistent.
-         */
 
         websiteStorage.saveWebsites(
             websites
@@ -711,7 +608,7 @@ class MainActivity : AppCompatActivity() {
 
 
     // ================================================================
-    // SHOW MESSAGE
+    // MESSAGE
     // ================================================================
 
     private fun showMessage(
